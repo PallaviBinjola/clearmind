@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Clearmind — Mental Wellness</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<link rel="stylesheet" href="css/app.css"/>
+</head>
+<body>
+
+<!-- ══ LANDING ══ -->
+<div id="pg-land" class="page active">
+  <nav class="nav">
+    <div class="brand"><span class="borb"></span>clearmind</div>
+    <div class="nav-r">
+      <button class="btn-g" onclick="go('pg-login')">Log in</button>
+      <button class="btn" onclick="go('pg-register')">Sign up free</button>
+    </div>
+  </nav>
+  <div class="land-body">
+    <section class="hero">
+      <div class="hgfx"><div class="gbg"></div><div class="orb o1"></div><div class="orb o2"></div></div>
+      <div class="hero-l">
+        <div class="badge"><span class="bdot"></span>ML-Powered Mental Wellness</div>
+        <h1>Your mind deserves<br/><em>someone who truly listens</em></h1>
+        <p>A real-time companion that analyses emotions across your conversations and diary entries, detects patterns, and responds to <em>you specifically</em> — free, always available.</p>
+        <div class="hbtns">
+          <button class="btn lg" onclick="go('pg-register')">Sign up free</button>
+          <button class="btn-g lg" onclick="goAppAsGuest()">Try as guest</button>
+        </div>
+        <div class="hstats">
+          <div class="hs"><span class="hs-n">Python ML</span><span class="hs-l">sentiment analysis</span></div>
+          <div class="hs-d"></div>
+          <div class="hs"><span class="hs-n">Free AI</span><span class="hs-l">OpenRouter models</span></div>
+          <div class="hs-d"></div>
+          <div class="hs"><span class="hs-n">9 exercises</span><span class="hs-l">evidence-based tools</span></div>
+        </div>
+      </div>
+<!--      <div class="hero-r">
+        <div class="mwin">
+          <div class="mbar"><span class="md r"></span><span class="md y"></span><span class="md g"></span><span class="murl">clearmind.app</span></div>
+          <div class="mbody">
+            <div class="mm b">Your boss yelled at you — that's not vague, it's a specific kind of hurt. What were they yelling about?</div>
+            <div class="mtag"><span class="mtagd"></span>Work / career theme detected</div>
+            <div class="mm u">it happens every time i make even a small mistake</div>
+            <div class="mm b">Every time — so this is a pattern, not a one-off. How long has your boss been doing this?</div>
+            <div class="mex"><span>&#129753;</span><span>Box breathing suggested by ML analysis</span></div>
+          </div>
+        </div>
+      </div>-->
+    </section>
+    <section class="feats">
+      <div class="seceye">What makes it different</div>
+      <div class="feat-grid">
+        <div class="fc hl"><div class="fi">&#9889;</div><h3>Python ML on every message</h3><p>VADER sentiment, emotion classification, theme extraction — runs on every chat + diary entry, building your emotional profile.</p><div class="fpill">Core feature</div></div>
+        <div class="fc"><div class="fi">&#128221;</div><h3>Diary drives deeper insights</h3><p>Diary entries are weighted 2x. Recurring phrases, entry patterns, and private tone all feed your live insights dashboard.</p></div>
+        <div class="fc"><div class="fi">&#128172;</div><h3>Truly conversational bot</h3><p>Aria reads your exact words and responds to them specifically — referencing your boss, your exam, your situation.</p></div>
+        <div class="fc"><div class="fi">&#127947;</div><h3>9 wellness exercises</h3><p>Box breathing, grounding, PMR, Pomodoro, body scan, cognitive reframing, gratitude, affirmations, expressive writing.</p></div>
+      </div>
+    </section>
+    <footer class="lfoot">
+      <div class="brand"><span class="borb"></span>clearmind</div>
+      <p>A mental wellness companion. Not a replacement for professional therapy.</p>
+    </footer>
+  </div>
+</div>
+
+<!-- ══ LOGIN ══ -->
+<div id="pg-login" class="page">
+  <div class="auth-wrap">
+    <div class="auth-brand" onclick="go('pg-land')"><span class="borb"></span>clearmind</div>
+    <div class="auth-card">
+      <div class="auth-h">Welcome back</div>
+      <div class="auth-sub">Log in to continue your wellness journey.</div>
+      <div class="auth-field"><label>Username</label><input class="auth-inp" id="li-user" type="text" placeholder="your username"/></div>
+      <div class="auth-field"><label>Password</label><input class="auth-inp" id="li-pass" type="password" placeholder="your password" onkeydown="if(event.key==='Enter')doLogin()"/></div>
+      <div class="auth-err" id="li-err"></div>
+      <button class="btn w100" style="margin-top:8px" onclick="doLogin()">Log in</button>
+      <div class="auth-divider">or</div>
+      <button class="btn-g w100" onclick="goAppAsGuest()">Continue as guest</button>
+      <div class="auth-switch">Don't have an account? <a onclick="go('pg-register')">Sign up free</a></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ REGISTER ══ -->
+<div id="pg-register" class="page">
+  <div class="auth-wrap">
+    <div class="auth-brand" onclick="go('pg-land')"><span class="borb"></span>clearmind</div>
+    <div class="auth-card">
+      <div class="auth-h">Create your account</div>
+      <div class="auth-sub">Free forever. Your data stays private.</div>
+      <div class="auth-field"><label>Your name</label><input class="auth-inp" id="rg-name" type="text" placeholder="What should Aria call you?"/></div>
+      <div class="auth-field"><label>Username</label><input class="auth-inp" id="rg-user" type="text" placeholder="choose a username"/></div>
+      <div class="auth-field"><label>Password</label><input class="auth-inp" id="rg-pass" type="password" placeholder="at least 6 characters"/></div>
+      <div class="auth-err" id="rg-err"></div>
+      <button class="btn w100" style="margin-top:8px" onclick="doRegister()">Create account</button>
+      <div class="auth-divider">or</div>
+      <button class="btn-g w100" onclick="goAppAsGuest()">Try as guest (no account)</button>
+      <div class="auth-switch">Already have an account? <a onclick="go('pg-login')">Log in</a></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ ONBOARDING (after register) ══ -->
+<div id="pg-onboard" class="page">
+  <div class="obwrap">
+    <div class="obbrand"><span class="borb"></span>clearmind</div>
+    <div class="obprog"><div class="opb on" id="op1"></div><div class="opb" id="op2"></div></div>
+    <div class="obs active" id="ob1">
+      <div class="obh">How are you feeling?</div>
+      <div class="obsub">This helps Aria personalise your first conversation.</div>
+      <div class="obf"><label>Right now, I feel...</label>
+        <div class="obmg">
+          <div class="om" onclick="pickMood(this,'Overwhelmed')">&#128548; Overwhelmed</div>
+          <div class="om" onclick="pickMood(this,'Anxious')">&#128560; Anxious</div>
+          <div class="om" onclick="pickMood(this,'Low')">&#128532; Low</div>
+          <div class="om" onclick="pickMood(this,'Okay')">&#128528; Okay</div>
+          <div class="om" onclick="pickMood(this,'Good')">&#128522; Good</div>
+          <div class="om" onclick="pickMood(this,'Unsure')">&#129300; Unsure</div>
+        </div>
+      </div>
+      <button class="btn" onclick="obGo(2)">Continue</button>
+    </div>
+    <div class="obs" id="ob2">
+      <div class="obh">What brings you here?</div>
+      <div class="obsub">Select all that apply — shapes how Aria talks to you.</div>
+      <div class="obchips" id="ob-goals">
+        <div class="oc" onclick="tog(this)">Manage anxiety</div><div class="oc" onclick="tog(this)">Reduce stress</div>
+        <div class="oc" onclick="tog(this)">Understand emotions</div><div class="oc" onclick="tog(this)">Work-life balance</div>
+        <div class="oc" onclick="tog(this)">Better sleep</div><div class="oc" onclick="tog(this)">Relationship issues</div>
+        <div class="oc" onclick="tog(this)">Self-confidence</div><div class="oc" onclick="tog(this)">Academic pressure</div>
+        <div class="oc" onclick="tog(this)">Grief or loss</div><div class="oc" onclick="tog(this)">Just exploring</div>
+      </div>
+      <button class="btn" style="margin-top:20px" onclick="obFinish()">Enter Clearmind</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ APP ══ -->
+<div id="pg-app" class="page">
+  <aside class="sidebar">
+    <div class="sbtop">
+      <div class="sbbrand" onclick="go('pg-land')" title="Home"><span class="borb sm"></span>cm</div>
+      <div class="sbdiv"></div>
+      <button class="sbbtn active" id="sb-chat" onclick="showPanel('chat')" title="Chat">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        <span class="sb-tooltip">Chat</span>
+      </button>
+      <button class="sbbtn" id="sb-insights" onclick="showPanel('insights')" title="Insights">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="22,12 18,12 15,21 9,3 6,12 2,12"/></svg>
+        <span class="sb-tooltip">Insights</span>
+      </button>
+      <button class="sbbtn" id="sb-diary" onclick="showPanel('diary')" title="Diary">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        <span class="sb-tooltip">Diary</span>
+      </button>
+      <button class="sbbtn" id="sb-tools" onclick="showPanel('tools')" title="Wellness Tools">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+        <span class="sb-tooltip">Tools</span>
+      </button>
+    </div>
+    <div class="sbbot">
+      <div class="sbav" id="sb-av" title="Profile">U</div>
+      <button class="sb-logout" onclick="doLogout()" title="Log out">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+      </button>
+    </div>
+  </aside>
+  <main class="appmain">
+
+    <!-- CHAT PANEL -->
+    <div class="panel active" id="pn-chat">
+      <div class="ph">
+        <div><div class="ph-title">Companion</div><div class="ph-sub" id="chat-sub">Ready to listen</div></div>
+        <div style="display:flex;align-items:center;gap:8px">
+          <div class="ai-badge" id="ai-badge">Smart AI</div>
+          <div class="pbadge grn"><span class="bdd"></span>Active</div>
+        </div>
+      </div>
+      <div class="moodbar">
+        <span class="mblbl">Check in:</span>
+        <button class="mbbtn" onclick="quickMood(this,'Great')">&#128522; Great</button>
+        <button class="mbbtn" onclick="quickMood(this,'Calm')">&#128524; Calm</button>
+        <button class="mbbtn" onclick="quickMood(this,'Low')">&#128532; Low</button>
+        <button class="mbbtn" onclick="quickMood(this,'Anxious')">&#128560; Anxious</button>
+        <button class="mbbtn" onclick="quickMood(this,'Stressed')">&#128548; Stressed</button>
+        <button class="mbbtn" onclick="quickMood(this,'Tired')">&#128564; Tired</button>
+        <button class="mbbtn" onclick="quickMood(this,'Angry')">&#128545; Angry</button>
+      </div>
+      <div class="chatfeed" id="chat-feed">
+        <div class="cdiv">Today</div>
+        <div class="mrow"><div class="av av-b">A</div>
+          <div class="mstack"><div class="bub bot" id="wb">Hello — I'm Aria. I'm here to listen, not just respond. What's on your mind today?</div></div>
+        </div>
+      </div>
+      <div class="typrow" id="typ-row">
+        <div class="av av-b" style="margin-right:9px">A</div>
+        <div class="typbubs"><span></span><span></span><span></span></div>
+      </div>
+      <div class="cinpwrap">
+        <div class="cinpbox">
+          <textarea id="cinp" placeholder="Share what's on your mind..." rows="1" onkeydown="onKey(event)" oninput="resTA(this)"></textarea>
+          <button class="sendbtn" id="sbtn" onclick="sendMsg()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22,2 15,22 11,13 2,9"/></svg>
+          </button>
+        </div>
+        <div class="inphint" id="hint">Python ML analyses every message in real-time</div>
+      </div>
+    </div>
+
+    <!-- INSIGHTS PANEL -->
+    <div class="panel" id="pn-insights">
+      <div class="ph">
+        <div><div class="ph-title">Insights</div><div class="ph-sub">Live ML analysis — chat + diary combined</div></div>
+        <button class="btn sm" onclick="loadInsights()">Refresh</button>
+      </div>
+      <div class="inscroll">
+        <div id="ins-empty" class="empty-state">
+          <div class="es-icon">&#128202;</div>
+          <div class="es-title">No data yet</div>
+          <div class="es-body">Chat with Aria and write diary entries. Insights appear once ML has enough data to analyse.</div>
+        </div>
+        <div id="ins-content" style="display:none;flex-direction:column;gap:14px"></div>
+      </div>
+    </div>
+
+    <!-- DIARY PANEL -->
+    <div class="panel" id="pn-diary">
+      <div class="ph">
+        <div><div class="ph-title">Diary</div><div class="ph-sub">ML-analysed — each entry weighted 2x in insights</div></div>
+        <button class="btn sm" onclick="openDiary()">+ New entry</button>
+      </div>
+      <div class="diaryscroll">
+        <div class="dform" id="dform">
+          <input type="text" class="dtinp" id="d-title" placeholder="Entry title (optional)..."/>
+          <textarea class="dbinp" id="d-body" placeholder="Write freely — this is private and ML-analysed to improve your insights..." rows="7"></textarea>
+          <div class="danalysis" id="danalysis" style="display:none"></div>
+          <div class="dform-btns">
+            <button class="btn sm" id="dsave-btn" onclick="saveDiary()">Save and Analyse</button>
+            <button class="btn-g sm" onclick="closeDiary()">Cancel</button>
+          </div>
+        </div>
+        <div id="diary-banner" class="diary-banner" style="display:none"></div>
+        <div id="dlist"><div class="empty-state" style="padding:36px"><div class="es-icon">&#128221;</div><div class="es-title">No entries yet</div><div class="es-body">Your first entry unlocks diary-specific ML insights.</div></div></div>
+      </div>
+    </div>
+
+    <!-- TOOLS PANEL -->
+    <div class="panel" id="pn-tools">
+      <div class="ph"><div><div class="ph-title">Wellness Tools</div><div class="ph-sub">Suggested by ML based on your emotional patterns</div></div></div>
+      <div class="tscroll">
+        <div id="tool-suggest" class="tool-suggest" style="display:none"></div>
+        <div class="tools-section-title">Breathing &amp; Relaxation</div>
+        <div class="tgrid">
+          <div class="tc" onclick="openMod('breathing')"><div class="tci">&#129753;</div><div class="tcn">Box Breathing</div><div class="tcd">4-4-4-4 pattern calms the nervous system in minutes.</div><div class="tcp">Anxiety / Stress / Panic</div></div>
+          <div class="tc" onclick="openMod('478')"><div class="tci">&#127752;</div><div class="tcn">4-7-8 Breathing</div><div class="tcd">Inhale 4s, hold 7s, exhale 8s. Powerful for sleep &amp; anxiety.</div><div class="tcp">Sleep / Deep anxiety</div></div>
+          <div class="tc" onclick="openMod('bodyscan')"><div class="tci">&#129333;</div><div class="tcn">Body Scan</div><div class="tcd">Progressive awareness from head to toe to release tension.</div><div class="tcp">Stress / Physical tension</div></div>
+          <div class="tc" onclick="openMod('pmr')"><div class="tci">&#128581;</div><div class="tcn">Progressive Muscle Relaxation</div><div class="tcd">Tense and release muscle groups to melt physical stress.</div><div class="tcp">Stress / Anger / Tension</div></div>
+        </div>
+        <div class="tools-section-title">Grounding &amp; Mindfulness</div>
+        <div class="tgrid">
+          <div class="tc" onclick="openMod('grounding')"><div class="tci">&#127807;</div><div class="tcn">5-4-3-2-1 Grounding</div><div class="tcd">Sensory anchoring to return to the present moment.</div><div class="tcp">Overwhelm / Panic</div></div>
+          <div class="tc" onclick="openMod('cognitive')"><div class="tci">&#129504;</div><div class="tcn">Cognitive Reframing</div><div class="tcd">Challenge and rewrite negative thought patterns step by step.</div><div class="tcp">Anxiety / Low mood</div></div>
+          <div class="tc" onclick="openMod('pomodoro')"><div class="tci">&#9201;</div><div class="tcn">Pomodoro Timer</div><div class="tcd">25-min focus + 5-min rest. Reduces overwhelm through structure.</div><div class="tcp">Stress / Procrastination</div></div>
+        </div>
+        <div class="tools-section-title">Reflection &amp; Positivity</div>
+        <div class="tgrid">
+          <div class="tc" onclick="openMod('gratitude')"><div class="tci">&#128591;</div><div class="tcn">Gratitude Practice</div><div class="tcd">Three items rewires the brain's negativity bias over time.</div><div class="tcp">Low mood / Depression</div></div>
+          <div class="tc" onclick="openMod('affirmations')"><div class="tci">&#128172;</div><div class="tcn">Affirmations</div><div class="tcd">Evidence-based reframes of negative self-talk patterns.</div><div class="tcp">Self-worth / Confidence</div></div>
+          <div class="tc" onclick="openDiaryFromTools()"><div class="tci">&#128211;</div><div class="tcn">Expressive Writing</div><div class="tcd">Write freely to process recurring or complex emotions.</div><div class="tcp">Rumination / Confusion</div></div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- ══ MODALS ══ -->
+<div class="modbg" id="mod-breathing" onclick="closeMod('breathing',event)">
+  <div class="modal">
+    <button class="modx" onclick="closeMod('breathing')">&#10005;</button>
+    <div class="modt">Box Breathing</div>
+    <div class="mods" id="brphlbl">Find a comfortable position. Press begin when ready.</div>
+    <div class="bring"><div class="brinn" id="brinn"><div class="brcnt" id="brcnt">4</div></div></div>
+    <div class="brph" id="brph">Inhale through your nose</div>
+    <div class="breath-cycles" id="brcycles"></div>
+    <button class="btn w100" id="brbtn" onclick="startBreath()">Begin</button>
+  </div>
+</div>
+
+<div class="modbg" id="mod-478" onclick="closeMod('478',event)">
+  <div class="modal">
+    <button class="modx" onclick="closeMod('478')">&#10005;</button>
+    <div class="modt">4-7-8 Breathing</div>
+    <div class="mods" id="b478lbl">A powerful reset for deep anxiety and sleep.</div>
+    <div class="bring"><div class="brinn" id="brinn478"><div class="brcnt" id="brcnt478">4</div></div></div>
+    <div class="brph" id="brph478">Inhale through your nose</div>
+    <button class="btn w100" id="b478btn" onclick="start478()">Begin</button>
+  </div>
+</div>
+
+<div class="modbg" id="mod-grounding" onclick="closeMod('grounding',event)">
+  <div class="modal">
+    <button class="modx" onclick="closeMod('grounding')">&#10005;</button>
+    <div class="modt">5-4-3-2-1 Grounding</div>
+    <div class="mods">Work through each sense slowly. Really pause and notice.</div>
+    <div class="glist">
+      <div class="gstep on" id="gs0"><div class="gn">5</div><div><strong>Things you can SEE</strong><p>Look around — name 5 objects you can see right now.</p></div></div>
+      <div class="gstep" id="gs1"><div class="gn">4</div><div><strong>Things you can TOUCH</strong><p>Feel clothing, chair, the floor beneath your feet.</p></div></div>
+      <div class="gstep" id="gs2"><div class="gn">3</div><div><strong>Things you can HEAR</strong><p>Background sounds, your own breathing, distant noise.</p></div></div>
+      <div class="gstep" id="gs3"><div class="gn">2</div><div><strong>Things you can SMELL</strong><p>Faint scents — air, skin, objects nearby.</p></div></div>
+      <div class="gstep" id="gs4"><div class="gn">1</div><div><strong>Thing you can TASTE</strong><p>Whatever is present in your mouth right now.</p></div></div>
+    </div>
+    <button class="btn w100" id="gbtn" onclick="gNext()">Next step</button>
+  </div>
+</div>
+
+<div class="modbg" id="mod-gratitude" onclick="closeMod('gratitude',event)">
+  <div class="modal">
+    <button class="modx" onclick="closeMod('gratitude')">&#10005;</button>
+    <div class="modt">Gratitude Practice</div>
+    <div class="mods">Name three things you are grateful for right now — big or small.</div>
+    <div class="gratrows">
+      <div class="gr"><div class="grn">1</div><input class="grinp" id="g1" placeholder="Something you appreciate..."/></div>
+      <div class="gr"><div class="grn">2</div><input class="grinp" id="g2" placeholder="A person, moment, or feeling..."/></div>
+      <div class="gr"><div class="grn">3</div><input class="grinp" id="g3" placeholder="Even something small counts..."/></div>
+    </div>
+    <button class="btn w100" onclick="saveGrat()">Save to diary</button>
+  </div>
+</div>
+
+<div class="modbg" id="mod-affirmations" onclick="closeMod('affirmations',event)">
+  <div class="modal">
+    <button class="modx" onclick="closeMod('affirmations')">&#10005;</button>
+    <div class="modt">Affirmations</div>
+    <div class="mods">Read each slowly. Notice where there is resistance — that is where the work is.</div>
+    <div class="afflist" id="afflist"></div>
+    <button class="btn w100" onclick="nextAff()">Next set</button>
+  </div>
+</div>
+
+<div class="modbg" id="mod-pmr" onclick="closeMod('pmr',event)">
+  <div class="modal">
+    <button class="modx" onclick="closeMod('pmr')">&#10005;</button>
+    <div class="modt">Progressive Muscle Relaxation</div>
+    <div class="mods">Tense each muscle group for 5 seconds, then release. Notice the difference.</div>
+    <div class="pmr-progress"><div class="pmr-fill" id="pmr-fill" style="width:0%"></div></div>
+    <div id="pmr-step-wrap"></div>
+    <div style="display:flex;gap:8px;margin-top:14px">
+      <button class="btn w100" id="pmr-btn" onclick="pmrNext()">Start</button>
+    </div>
+  </div>
+</div>
+
+<div class="modbg" id="mod-pomodoro" onclick="closeMod('pomodoro',event)">
+  <div class="modal">
+    <button class="modx" onclick="closeMod('pomodoro')">&#10005;</button>
+    <div class="modt">Pomodoro Timer</div>
+    <div class="mods">25 min focus, then 5 min break. Repeat up to 4 times.</div>
+    <div class="pom-display">
+      <div class="pom-time" id="pom-time">25:00</div>
+      <div class="pom-label" id="pom-label">Focus session</div>
+    </div>
+    <div class="pom-count" id="pom-count"></div>
+    <div class="pom-btns">
+      <button class="btn" id="pom-btn" onclick="pomToggle()">Start</button>
+      <button class="btn-g" onclick="pomReset()">Reset</button>
+    </div>
+  </div>
+</div>
+
+<div class="modbg" id="mod-bodyscan" onclick="closeMod('bodyscan',event)">
+  <div class="modal">
+    <button class="modx" onclick="closeMod('bodyscan')">&#10005;</button>
+    <div class="modt">Body Scan</div>
+    <div class="mods">Bring gentle awareness to each area. No need to change anything — just notice.</div>
+    <div id="bodyscan-area"></div>
+    <button class="btn w100" id="bs-btn" onclick="bsNext()">Begin</button>
+  </div>
+</div>
+
+<div class="modbg" id="mod-cognitive" onclick="closeMod('cognitive',event)">
+  <div class="modal wide">
+    <button class="modx" onclick="closeMod('cognitive')">&#10005;</button>
+    <div class="modt">Cognitive Reframing</div>
+    <div class="mods">Challenge the thought. Answer honestly — not positively, just accurately.</div>
+    <div class="cog-field"><label>The thought I'm having</label><textarea class="cog-ta" id="cog-t" placeholder="e.g. I always mess everything up"></textarea></div>
+    <div class="cog-field"><label>Evidence that supports this thought</label><textarea class="cog-ta" id="cog-for" placeholder="What makes this feel true?"></textarea></div>
+    <div class="cog-field"><label>Evidence against this thought</label><textarea class="cog-ta" id="cog-against" placeholder="What actually contradicts it?"></textarea></div>
+    <div class="cog-field"><label>A more balanced way to see this</label><textarea class="cog-ta" id="cog-balanced" placeholder="Not positive, just more accurate..."></textarea></div>
+    <button class="btn w100" onclick="saveCognitive()">Save to diary</button>
+  </div>
+</div>
+
+<script src="js/app.js"></script>
+</body>
+</html>
